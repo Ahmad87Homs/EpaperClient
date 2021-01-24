@@ -1,17 +1,22 @@
 import  socket
 import imageToByte as itb
 import time
+from PIL import Image
+
 #defination Section
 
-data=itb.convertTobinaryMonochrome('image4.JPG',296,128)
-reves_data=itb.rigtToLiftImage(data)
+image = Image.open('image1.bmp')
+image = image.rotate(360)
+
+data=itb.convertTobinaryMonochrome(image,296,128)
+reves_data=itb.rigtToLiftImage(data,296,128)
 str_data=itb.converttoHEXstream(reves_data)
 
 # start sending data
 Buffer_Size=1024
 s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 # TCP Protcol
-ip_port=('192.168.1.46',80)
+ip_port=('192.168.1.48',80)
 try:
     s.connect(ip_port)
     print("clint addrress",s.getsockname())

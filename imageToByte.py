@@ -29,16 +29,16 @@ def BinaryToDecimal(binary):
     return (decimal)
 
 
-def convertTobinaryMonochrome(path,width,height):
+def convertTobinaryMonochrome(image,width,height):
     white = (255)
     black = (0)
     data=''
     count=0
-    im = Image.open(path)
-    image = im.resize((width, height))
+    #image = Image.open(path)
+    image = image.resize((width, height))
     image = image.convert('1')
-    for i in range(0, 296):
-        for j in range(0, 128):
+    for i in range(0, width):
+        for j in range(0, height):
             if ((image.getpixel((i, j))) == white):
                 data = data + '1'
             elif ((image.getpixel((i, j))) == black):
@@ -53,11 +53,11 @@ def convertTobinaryMonochrome(path,width,height):
         return 'Converting Error'
 
 
-def rigtToLiftImage(data):
+def rigtToLiftImage(data,width,height):
     reves_data=''
-    for i in range(0, 296):
-        for j in range(0, 128):
-            index = ((295 - i) * 128) + j
+    for i in range(0, width):
+        for j in range(0, height):
+            index = ((width-1 - i) * height) + j
             reves_data = reves_data + data[index]
     return reves_data
 

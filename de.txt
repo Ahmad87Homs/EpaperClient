@@ -1,0 +1,26 @@
+    def connect_Server(self):
+        ip_port = (self.le_ip.text(),int(self.le_port.text()))
+        try:
+            sock.connect(ip_port)
+            print("c lint addrress", sock.getsockname())
+            print("server addrress", sock.getpeername())
+            time.sleep(1)
+            count = 0
+            image = Image.open('image1.bmp')
+            image = image.rotate(360)
+
+            data = itb.convertTobinaryMonochrome(image, 296, 128)
+            reves_data = itb.rigtToLiftImage(data, 296, 128)
+            str_data = itb.converttoHEXstream(reves_data)
+
+            for i in range(0, len(str_data), 128):
+                print(str_data[i:i + 128])
+                sock.send(str_data[i:i + 128].encode("utf-8"))
+                count += 1
+                time.sleep(.010)
+            print(count)
+            sock.close()
+        except Exception as msg:
+            print('Error Message:', msg)
+        finally:
+            print("program finished")
