@@ -61,6 +61,15 @@ def rigtToLiftImage(data,width,height):
             reves_data = reves_data + data[index]
     return reves_data
 
+def ButtomToLTopImage(data,width,height):
+    reves_data=''
+    for i in range(0, height):
+        for j in range(0, width):
+            index=(height-i-1)+(height*j )
+           # index = ((width-1 - i) * height) + j
+            reves_data = reves_data + data[index]
+    return reves_data
+
 
 def converttoHEXstream(reves_data):
     str_data = ''
